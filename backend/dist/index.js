@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
-const port = 5003;
+const port = 5004;
 // Middleware för att logga alla inkommande förfrågningar
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
