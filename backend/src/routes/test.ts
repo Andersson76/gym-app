@@ -2,8 +2,8 @@ import { Router } from "express";
 
 const router = Router();
 
-router.post("/", (req, res) => {
-  res.json({ message: "Post request recieved!" });
+router.get("/", (req, res) => {
+  res.json({ message: "Hello from TestRoutes =)" });
 });
 
 export default router;
