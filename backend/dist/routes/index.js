@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const test_1 = __importDefault(require("./test"));
+const workouts_1 = __importDefault(require("./workouts"));
 const router = (0, express_1.Router)();
-// Länka test-routes till "/test"
 router.use("/test", test_1.default);
-// Root-endpoint
+router.use("/workouts", workouts_1.default);
 router.get("/", (req, res) => {
     res.send("Hello from Index");
 });
