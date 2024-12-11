@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import { Pool } from "pg";
 
 const pool = new Pool({
-  user: process.env.POSTGRES_USER,
+  user: process.env.PGUSER,
   host: "database",
-  database: process.env.POSTGRES_DB,
-  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.PGDB,
+  password: process.env.PGPASSWORD,
   port: 5432,
 });
 
