@@ -1,6 +1,9 @@
 export interface Workout {
-  id: number;
+  /* id: number;
   name: string;
   duration: number;
-  type: string;
+  type: string; */
+  title: string;
+  description: string;
+  date: string;
 }
