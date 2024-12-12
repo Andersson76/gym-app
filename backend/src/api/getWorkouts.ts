@@ -4,11 +4,11 @@ import { Pool } from "pg";
 const pool = new Pool({
   user: process.env.PGUSER,
   host: "database",
-  database: process.env.PGDB,
+  database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
   port: 5432,
 });
-
+console.log(pool);
 export const getWorkouts = async (req: Request, res: Response) => {
   try {
     const result = await pool.query("SELECT * FROM workouts");
