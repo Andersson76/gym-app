@@ -4,7 +4,7 @@ import { postWorkout } from "../api/postWorkout";
 
 const router = Router();
 
-router.get("/workouts", getWorkouts);
-router.post("/workouts", postWorkout);
+router.get("/", getWorkouts);
+router.post("/", postWorkout);
 
 export default router;
