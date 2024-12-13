@@ -39,10 +39,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
-if (!process.env.PGUSER || !process.env.PGPASSWORD || !process.env.PGDATABASE) {
-    console.error("Missing required environment variables");
-    process.exit(1);
-}
 const PORT = Number(process.env.PORT) || 5004;
 const HOST = "0.0.0.0";
 app_1.default.listen(PORT, HOST, () => {

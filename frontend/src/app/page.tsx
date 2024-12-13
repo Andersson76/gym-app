@@ -1,3 +1,7 @@
+"use client";
+
+import Dashboard from "@/components/DashboardOutput";
+
 export default function Home() {
   return (
     <div className="flex flex-col md:flex-row h-screen text-blue-500">
@@ -7,6 +11,7 @@ export default function Home() {
         <p className="mt-2 text-gray-600">
           Track your workouts, create plans, and more!
         </p>
+        <Dashboard />
       </main>
     </div>
   );
