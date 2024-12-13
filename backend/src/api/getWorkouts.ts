@@ -2,13 +2,15 @@ import { Request, Response } from "express";
 import { Pool } from "pg";
 
 const pool = new Pool({
-  user: process.env.PGUSER,
-  host: "database",
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: 5432,
+  user: process.env.PGUSER || "postgres",
+  host: process.env.PGHOST || "database",
+  database: process.env.PGDATABASE || "gymapp",
+  password: process.env.PGPASSWORD || "extrajoss",
+  port: Number(process.env.PGPORT) || 5432,
 });
+
 console.log(pool);
+
 export const getWorkouts = async (req: Request, res: Response) => {
   try {
     const result = await pool.query("SELECT * FROM workouts");
