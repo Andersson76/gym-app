@@ -2,26 +2,27 @@ import { Request, Response } from "express";
 import { Pool } from "pg";
 
 const pool = new Pool({
-  user: process.env.PGUSER,
-  host: "database",
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: 5432,
+  user: process.env.PGUSER || "postgres",
+  host: process.env.PGHOST || "database",
+  database: process.env.PGDATABASE || "gymapp",
+  password: process.env.PGPASSWORD || "extrajoss",
+  port: Number(process.env.PGPORT) || 5432,
 });
+
 console.log(pool);
 
 export const postWorkout = async (req: Request, res: Response) => {
-  const { user_id, date, title, description } = req.body;
+  const { date, title, description } = req.body;
   console.log(req.body);
 
-  if (!user_id || !date || !title || !description) {
+  if (!date || !title || !description) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
   try {
     const result = await pool.query(
-      "INSERT INTO workouts (user_id, date, title, description) VALUES ($1, $2, $3, $4) RETURNING *",
-      [user_id, date, title, description]
+      "INSERT INTO workouts (date, title, description) VALUES ($1, $2, $3) RETURNING *",
+      [date, title, description]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
