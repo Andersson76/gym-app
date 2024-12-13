@@ -10,8 +10,14 @@ export default function WorkoutInput() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validera att alla fält är ifyllda
+    if (!title || !description || !date) {
+      alert("All fields are required");
+      return; // Avbryt om något fält är tomt
+    }
+
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/workouts`,
+      `${process.env.NEXT_PUBLIC_API_URL}/workouts`,
       {
         method: "POST",
         headers: {
@@ -21,14 +27,25 @@ export default function WorkoutInput() {
       }
     );
 
-    if (response.ok) {
-      alert("Workout added successfully!");
-      setTitle("");
-      setDescription("");
-      setDate("");
-    } else {
-      alert("Error adding workout.");
+    const textResponse = await response.text();
+    console.log("Response Text:", textResponse);
+
+    if (!response.ok) {
+      alert("Error adding workout: " + textResponse);
+      return;
     }
+
+    try {
+      const responseData = JSON.parse(textResponse);
+      console.log("Parsed Response:", responseData);
+    } catch (err) {
+      console.error("Error parsing response:", err);
+    }
+
+    alert("Workout added successfully!");
+    setTitle("");
+    setDescription("");
+    setDate("");
   };
 
   return (
