@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 import cors from "cors";
 import { logger } from "./middleware/logger";
 import router from "./routes";
@@ -11,6 +12,7 @@ app.use(
   })
 );
 
+app.use(bodyParser.json())
 app.use(logger);
 app.use(express.json());
 
