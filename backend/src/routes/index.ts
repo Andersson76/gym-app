@@ -4,12 +4,14 @@ import workoutsRoutes from "./workouts";
 
 const router = Router();
 
-router.use("/test", testRoutes);
-
-router.use("/workouts", workoutsRoutes);
-
 router.get("/", (req, res) => {
-  res.send("Hello from Index");
+  res.json({
+    message: "API is running",
+    routes: {
+      test: "/test",
+      workouts: "/workouts",
+    },
+  });
 });
 
 export default router;
