@@ -1,12 +1,39 @@
-DROP TABLE IF EXISTS program_exercises CASCADE;
-DROP TABLE IF EXISTS programs CASCADE;
+DROP TABLE IF EXISTS workout_exercises CASCADE;
 DROP TABLE IF EXISTS exercises CASCADE;
 DROP TABLE IF EXISTS workouts CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE exercises (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    category VARCHAR(50),
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE workouts (
     id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     date DATE NOT NULL,
     title VARCHAR(100) NOT NULL,
-    description TEXT
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE workout_exercises (
+    id SERIAL PRIMARY KEY,
+    workout_id INTEGER REFERENCES workouts(id) ON DELETE CASCADE,
+    exercise_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE,
+    sets INTEGER NOT NULL,
+    reps INTEGER NOT NULL,
+    weight NUMERIC(5, 2),
+    rest_time INTERVAL
 );
