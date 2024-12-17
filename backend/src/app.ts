@@ -6,11 +6,7 @@ import router from "./routes";
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+app.use(cors());
 
 app.use(logger, errorHandler);
 app.use(express.json());
