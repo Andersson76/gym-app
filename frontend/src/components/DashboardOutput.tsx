@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface Workout {
@@ -14,22 +15,18 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchWorkouts = async () => {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/workouts`
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch workouts");
-        }
-        const data = await response.json();
-        setWorkouts(data);
+        setWorkouts(response.data);
       } catch (err) {
-        setError("Error fetching workouts");
-        console.error(err);
+        console.error("Error fetching workouts:", err);
+        setError(`Failed to fetch workouts: ${error}`);
       }
     };
 
     fetchWorkouts();
-  }, []);
+  }, [error]);
 
   return (
     <div className="p-4 bg-gray-100 rounded-md">
