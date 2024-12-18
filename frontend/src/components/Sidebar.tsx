@@ -25,7 +25,7 @@ export default function Sidebar() {
             <Link
               href="/settings"
               className="text-white text-2xl block py-5 px-10"
-              data-testid="settings-link"
+              data-testid="settings-button"
             >
               Settings
             </Link>
