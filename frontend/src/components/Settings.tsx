@@ -1,11 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Settings() {
   const [enabled, setEnabled] = useState(false);
 
+  useEffect(() => {
+    const savedSetting = localStorage.getItem("setting-enabled");
+    setEnabled(savedSetting === "true");
+  }, []);
+
   const toggleSetting = () => {
-    setEnabled(!enabled);
+    const newStatus = !enabled;
+    setEnabled(newStatus);
+    localStorage.setItem("setting-enabled", newStatus.toString());
   };
 
   return (
