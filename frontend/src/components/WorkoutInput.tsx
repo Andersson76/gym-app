@@ -10,10 +10,9 @@ export default function WorkoutInput() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validera att alla fält är ifyllda
     if (!title || !description || !date) {
       alert("All fields are required");
-      return; // Avbryt om något fält är tomt
+      return;
     }
 
     const response = await fetch(

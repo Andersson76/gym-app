@@ -1,11 +1,18 @@
 {
   "devDependencies": {
+    "@cypress/code-coverage": "^3.13.9",
     "@cypress/webpack-preprocessor": "^6.0.2",
+    "@types/node": "^18.19.68",
+    "babel-plugin-istanbul": "^7.0.0",
     "cypress": "^13.17.0",
+    "istanbul-lib-coverage": "^3.2.2",
+    "istanbul-reports": "^3.1.7",
+    "nyc": "^17.1.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.7.2"
   },
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "coverage": "nyc report --reporter=html"
   }
 }

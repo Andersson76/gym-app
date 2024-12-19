@@ -2,14 +2,14 @@
 import { useState, useEffect } from "react";
 
 export default function Settings() {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState<boolean>(false);
 
   useEffect(() => {
     const savedSetting = localStorage.getItem("setting-enabled");
     setEnabled(savedSetting === "true");
   }, []);
 
-  const toggleSetting = () => {
+  const toggleSetting = (): void => {
     const newStatus = !enabled;
     setEnabled(newStatus);
     localStorage.setItem("setting-enabled", newStatus.toString());
