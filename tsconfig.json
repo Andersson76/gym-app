@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "target": "ESNext",
     "lib": ["ESNext", "DOM"],
     "module": "CommonJS",
@@ -8,5 +9,5 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "cypress/**/*.ts"]
+  "include": ["src/**/*", "**/*.tsx", "cypress/**/*.ts"]
 }
