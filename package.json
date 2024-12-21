@@ -2,14 +2,20 @@
   "devDependencies": {
     "@cypress/code-coverage": "^3.13.9",
     "@cypress/webpack-preprocessor": "^6.0.2",
+    "@types/cypress": "^0.1.6",
     "@types/node": "^18.19.68",
+    "@types/react": "^19.0.2",
     "babel-plugin-istanbul": "^7.0.0",
     "cypress": "^13.17.0",
     "istanbul-lib-coverage": "^3.2.2",
     "istanbul-reports": "^3.1.7",
+    "next": "^12.3.4",
     "nyc": "^17.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "webpack": "^5.97.1"
   },
   "scripts": {
     "test": "cypress open",
