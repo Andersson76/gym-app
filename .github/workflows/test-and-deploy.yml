@@ -23,7 +23,7 @@ jobs:
 
       - name: Set up Docker
         run: |
-          docker compose -f docker-compose.yml up -d
+          docker compose -f docker-compose.yml up -d backend frontend
 
       - name: Wait for backend to start
         run: |
