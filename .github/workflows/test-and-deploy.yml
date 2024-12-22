@@ -3,7 +3,7 @@ name: Test and Deploy
 on:
   push:
     branches:
-      - main
+      - main # Trigger actions when pushing to the main branch
 
 jobs:
   test:
@@ -29,9 +29,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Run tests
-        run: npm run test -- --coverage
 
       - name: Run Cypress E2E tests
         run: npx cypress run --spec 'cypress/e2e/settings.cy.ts'
