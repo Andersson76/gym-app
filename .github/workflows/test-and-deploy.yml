@@ -25,14 +25,6 @@ jobs:
         run: |
           docker compose -f docker-compose.yml up -d backend frontend
 
-      - name: Wait for backend to start
-        run: |
-          echo "Waiting for backend to start..."
-          while ! curl -s http://localhost:3000; do
-            sleep 5
-          done
-          echo "Backend is up and running."
-
       - name: Install dependencies
         run: |
           npm install
