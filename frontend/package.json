@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "nyc mocha '/Users/martin/Documents/gym-app/cypress/e2e/settings.cy.ts'",
+    "coverage": "nyc report --reporter=html"
   },
   "dependencies": {
     "axios": "^1.7.9",

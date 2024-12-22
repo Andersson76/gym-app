@@ -9,30 +9,26 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     services:
       postgres:
         image: postgres:15
-        env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: gymapp
         ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U user -d gymapp"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          - 5004:5004
+        options: --health-cmd="curl --silent --fail http://localhost:5004/health || exit 1"
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: extrajoss
+          POSTGRES_DB: gymapp
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: 18
 
