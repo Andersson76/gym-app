@@ -32,7 +32,6 @@ jobs:
 
       - name: Start backend and frontend
         run: |
-          cd /Users/martin/Documents/gym-app/docker-compose.yml
           docker compose up -d backend frontend
 
       - name: Wait for frontend to be ready
