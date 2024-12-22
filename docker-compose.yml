@@ -1,0 +1,56 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5004:5004"
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: extrajoss
+      PGDATABASE: gymapp
+      PGHOST: database
+      PGPORT: 5432
+    depends_on:
+      - database
+    volumes:
+      - ./backend:/app
+    command: npm run start
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:5004/health"]
+      interval: 15s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - ./frontend:/app
+    command: npm run dev
+
+  database:
+    image: postgres:15
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: extrajoss
+      POSTGRES_DB: gymapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres.sql:/docker-entrypoint-initdb.d/postgres.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
