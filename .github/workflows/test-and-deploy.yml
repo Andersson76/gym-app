@@ -22,11 +22,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: List test files
-        run: ls -la cypress/e2e
+      - name: Run Cypress E2E tests
+        run: npm run test
 
-      - name: Run tests
-        run: npm run test -- --coverage
+      - name: Generate code coverage report
+        run: npm run coverage
 
   start-backend-and-frontend:
     runs-on: ubuntu-latest
