@@ -27,7 +27,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "nyc mocha 'cypress/e2e/settings.cy.ts'",
+    "test": "npx cypress run --spec 'cypress/e2e/settings.cy.ts'",
     "coverage": "nyc report --reporter=html"
   }
 }
