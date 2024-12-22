@@ -1,23 +1,18 @@
-name: CI - Test and Coverage
+name: Test and Deploy
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     services:
-      postgres:
+      database:
         image: postgres:15
         ports:
-          - 5004:5004
-        options: --health-cmd="curl --silent --fail http://localhost:5004/health || exit 1"
+          - 5432:5432
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: extrajoss
@@ -30,26 +25,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: "16"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Start backend
-        run: |
-          npm run build
-          npm start &
-        env:
-          DATABASE_URL: postgres://postgres:extrajoss@database:5432/gymapp
-
       - name: Run tests
-        run: npm run test
+        run: npm run test -- --coverage
 
-      - name: Generate coverage report
-        run: npm run coverage
-
-      - name: Upload coverage report
+      - name: Upload code coverage report
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
-          path: coverage/lcov-report
+          path: coverage
