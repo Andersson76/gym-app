@@ -3,7 +3,7 @@ name: Test and Deploy
 on:
   push:
     branches:
-      - main
+      - main # Trigger actions when pushing to the main branch
 
 jobs:
   test:
@@ -25,14 +25,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
 
       - name: Install dependencies
         run: npm install
 
       - name: Start backend and frontend
         run: |
-          docker compose up -d backend frontend
+          cd /Users/martin/Documents/gym-app/docker-compose.yml
+          docker-compose up -d backend frontend
 
       - name: Wait for frontend to be ready
         run: |
