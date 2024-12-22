@@ -14,7 +14,7 @@ const webpackConfig: Configuration = {
       {
         test: /\.tsx?$/,
         use: {
-          loader: "ts-loader",
+          loader: "babel-loader",
           options: {
             transpileOnly: true,
           },

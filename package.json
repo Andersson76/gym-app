@@ -1,5 +1,7 @@
 {
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "@badeball/cypress-cucumber-preprocessor": "^21.0.3",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
     "@cypress/browserify-preprocessor": "^3.0.2",
@@ -8,11 +10,12 @@
     "@types/cypress": "^0.1.6",
     "@types/node": "^18.19.68",
     "@types/react": "^19.0.2",
+    "babel-loader": "^9.2.1",
     "babel-plugin-istanbul": "^7.0.0",
     "cypress": "^13.17.0",
     "istanbul-lib-coverage": "^3.2.2",
     "istanbul-reports": "^3.1.7",
-    "next": "^12.3.4",
+    "next": "^15.1.2",
     "nyc": "^17.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -21,7 +24,7 @@
     "webpack": "^5.97.1"
   },
   "scripts": {
-    "test": "cypress open",
+    "test": "nyc mocha '/Users/martin/Documents/gym-app/cypress/e2e/settings.cy.ts'",
     "coverage": "nyc report --reporter=html"
   }
 }
