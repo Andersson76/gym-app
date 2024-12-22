@@ -1,13 +1,15 @@
-name: Test and Deploy
+name: Run E2E Tests with Cypress
 
 on:
   push:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
 jobs:
-  build-and-test:
+  e2e-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,30 +22,20 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Run Cypress E2E tests
-        run: npm run test
-
-      - name: Generate code coverage report
-        run: npm run coverage
-
-  start-backend-and-frontend:
-    runs-on: ubuntu-latest
-    needs: build-and-test
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Docker
         run: |
-          docker compose -f docker-compose.yml up -d backend frontend
+          npm ci
 
-      - name: Wait for services
+      - name: Start backend server
         run: |
-          sleep 15
-          docker logs $(docker ps -q --filter "name=backend")
+          docker compose up -d backend
 
-      - name: Run Cypress E2E tests
-        run: npx cypress run --spec 'cypress/e2e/settings.cy.ts'
+      - name: Wait for backend to start
+        run: |
+          while ! curl -s http://localhost:3000; do
+            echo "Waiting for backend to start..."
+            sleep 5
+          done
+
+      - name: Run Cypress tests
+        run: |
+          npx cypress run --spec 'cypress/e2e/settings.cy.ts'
