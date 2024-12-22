@@ -1,5 +1,5 @@
 import webpack from "@cypress/webpack-preprocessor";
-import codeCoverageTask from "@cypress/code-coverage/task";
+import coverage from "@cypress/code-coverage/task";
 import { defineConfig } from "cypress";
 
 export default defineConfig({
@@ -31,7 +31,7 @@ export default defineConfig({
 
       on("file:preprocessor", webpack(options));
 
-      codeCoverageTask(on, config);
+      coverage(on, config);
 
       return config;
     },
