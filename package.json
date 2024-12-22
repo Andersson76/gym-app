@@ -24,6 +24,9 @@
     "webpack": "^5.97.1"
   },
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "test": "nyc mocha '/Users/martin/Documents/gym-app/cypress/e2e/settings.cy.ts'",
     "coverage": "nyc report --reporter=html"
   }
