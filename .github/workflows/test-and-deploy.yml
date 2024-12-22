@@ -3,7 +3,7 @@ name: Test and Deploy
 on:
   push:
     branches:
-      - main # Trigger actions when pushing to the main branch
+      - main
 
 jobs:
   test:
@@ -25,10 +25,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: '16'
 
       - name: Install dependencies
         run: npm install
+
+      - name: Start backend and frontend
+        run: |
+          docker-compose up -d backend frontend
+
+      - name: Wait for frontend to be ready
+        run: |
+          npm install -g wait-on
+          wait-on http://localhost:3000
 
       - name: Run Cypress E2E tests
         run: npx cypress run --spec 'cypress/e2e/settings.cy.ts'
